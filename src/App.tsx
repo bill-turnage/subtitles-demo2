@@ -194,7 +194,7 @@ export default function App() {
 
       <div className="flex flex-1 min-h-0">
         {/* Unified Sidebar */}
-        <aside className="w-[230px] bg-slate-850 border border-slate-700 p-3.5 flex flex-col gap-6 shrink-0 z-10 overflow-y-auto custom-scrollbar rounded-bl">
+        <aside className="w-[230px] bg-slate-850 border border-slate-700 p-3.5 flex flex-col gap-5 shrink-0 z-10 overflow-y-auto custom-scrollbar rounded-bl">
           {/* Source Section */}
           <section className="space-y-3">
             <label className="text-[10px] uppercase font-black text-slate-200 block tracking-wider opacity-70">Source Media</label>
@@ -295,7 +295,7 @@ export default function App() {
                   {Array.from({ length: 41 }).map((_, i) => (
                     <div 
                       key={i} 
-                      className={`bg-slate-600 ${i % 10 === 0 ? 'h-5 w-[1px]' : i % 5 === 0 ? 'h-4 w-[0.5px]' : 'h-3 w-[0.5px]'}`}
+                      className={`bg-slate-600 ${i % 10 === 0 ? 'h-3.5 w-[1px]' : i % 5 === 0 ? 'h-2 w-[0.5px]' : 'h-1.5 w-[0.5px]'}`}
                     />
                   ))}
                 </div>
@@ -340,9 +340,9 @@ export default function App() {
             >
               {isGenerating ? (
                 <>
-                  <span className="z-10 flex items-center gap-2">
+                  <span className="z-10 flex items-center gap-2 text-slate-100/70">
                     <Loader2 size={12} className="animate-spin text-black" />
-                    {genProgress}%
+                    Generating {genProgress}%
                   </span>
                   <div 
                     className="absolute bottom-0 left-0 h-1.5 bg-black/40 transition-all duration-300"

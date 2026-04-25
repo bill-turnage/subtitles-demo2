@@ -29,15 +29,15 @@ export async function generateSubtitles(
     `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-1.5-flash-latest",
       contents: [
         {
           role: "user",
           parts: [
-            { text: prompt },
+            { text: prompt.trim() },
             {
               inlineData: {
-                mimeType: "video/mp4", // Force standard mime for the API
+                mimeType: file.type || "video/mp4",
                 data: base64Data
               }
             }
@@ -45,7 +45,7 @@ export async function generateSubtitles(
         }
       ],
       config: {
-        responseMimeType: "application/json"
+        responseMimeType: "application/json",
       }
     });
 

@@ -31,21 +31,27 @@ export async function generateSubtitles(
 
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: [
-        {
-          parts: [
-            { text: prompt },
-            { inlineData: { mimeType: file.type, data: base64Data } }
-          ],
-        },
-      ],
+      contents: {
+        parts: [
+          { text: prompt },
+          {
+            inlineData: {
+              mimeType: file.type,
+              data: base64Data
+            }
+          }
+        ]
+      },
       config: {
         responseMimeType: "application/json",
       }
     });
 
     onProgress(90);
-    const result = JSON.parse(response.text || "[]") as any[];
+    
+    // Use .text property as per @google/genai spec
+    const resultText = response.text || "[]";
+    const result = JSON.parse(resultText) as any[];
     
     onProgress(100);
     return result.map((s, i) => ({

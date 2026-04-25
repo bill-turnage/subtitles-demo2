@@ -29,7 +29,7 @@ export async function generateSubtitles(
     `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-1.5-flash",
       contents: [
         {
           role: "user",
@@ -45,19 +45,7 @@ export async function generateSubtitles(
         }
       ],
       config: {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.ARRAY,
-          items: {
-            type: Type.OBJECT,
-            properties: {
-              startTime: { type: Type.NUMBER, description: "Start time in seconds" },
-              endTime: { type: Type.NUMBER, description: "End time in seconds" },
-              text: { type: Type.STRING, description: "Subtitle text" }
-            },
-            required: ["startTime", "endTime", "text"]
-          }
-        }
+        responseMimeType: "application/json"
       }
     });
 

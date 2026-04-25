@@ -37,7 +37,7 @@ export async function generateSubtitles(
             { text: prompt },
             {
               inlineData: {
-                mimeType: file.type,
+                mimeType: "video/mp4", // Force standard mime for the API
                 data: base64Data
               }
             }

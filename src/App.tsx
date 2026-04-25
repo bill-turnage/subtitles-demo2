@@ -196,7 +196,7 @@ export default function App() {
         {/* Unified Sidebar */}
         <aside className="w-[230px] bg-slate-850 border border-slate-700 p-3.5 flex flex-col gap-4.5 shrink-0 z-10 overflow-y-auto custom-scrollbar rounded-bl">
           {/* Source Section */}
-          <section className="space-y-1.5">
+          <section className="space-y-1">
             <label className="text-[10px] uppercase font-black text-slate-200 block tracking-wider opacity-70">Source Media</label>
             <div className="relative">
               <input
@@ -226,7 +226,7 @@ export default function App() {
           </section>
 
           {/* Language Section */}
-          <section className="space-y-1.5">
+          <section className="space-y-1">
             <label className="text-[10px] uppercase font-black text-slate-200 block tracking-wider opacity-70">Language</label>
             <div className="relative">
               <Globe size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 pointer-events-none" />
@@ -243,10 +243,10 @@ export default function App() {
           </section>
 
           {/* Styling Section */}
-          <section className="space-y-2.5 pt-1 border-t border-slate-700/50">
+          <section className="space-y-2 pt-1 border-t border-slate-700/50">
             <label className="text-[10px] uppercase font-black text-slate-200 block tracking-wider opacity-70">Styling</label>
             
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <div className="flex justify-between items-center px-0.5">
                 <span className="text-[10px] text-slate-200 font-bold uppercase">Size</span>
                 <span className="text-[10px] font-mono text-yellow-400 font-black">{styleConfig.fontSize}</span>
@@ -263,7 +263,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1">
               <div className="grid grid-cols-4 gap-1.5">
                 {(['none', 'small', 'medium', 'large'] as DropShadowDepth[]).map(level => (
                   <button
@@ -283,7 +283,7 @@ export default function App() {
           </section>
 
           {/* Sync Section */}
-          <section className="space-y-2 pt-1 border-t border-slate-700/50">
+          <section className="space-y-1.5 pt-1 border-t border-slate-700/50">
             <label className="text-[10px] uppercase font-black text-slate-200 block tracking-wider opacity-70">Sync</label>
             <div className="bg-slate-900 p-3 rounded border border-slate-600">
               <div className={`text-center text-sm font-mono mb-1.5 font-black ${syncOffset === 0 ? 'text-slate-400' : syncOffset > 0 ? 'text-green-400' : 'text-red-400'}`}>

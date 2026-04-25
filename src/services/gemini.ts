@@ -21,6 +21,7 @@ export async function generateSubtitles(
     onProgress(30);
 
     const base64Data = await fileToBase64(audioBlob);
+    console.log("Audio blob size (KB):", Math.round(audioBlob.size / 1024));
     onProgress(50);
 
     const prompt = `
@@ -31,7 +32,7 @@ export async function generateSubtitles(
     `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-1.5-flash",
+      model: "gemini-flash-latest",
       contents: [
         {
           role: "user",
@@ -48,6 +49,18 @@ export async function generateSubtitles(
       ],
       config: {
         responseMimeType: "application/json",
+        responseSchema: {
+          type: Type.ARRAY,
+          items: {
+            type: Type.OBJECT,
+            properties: {
+              startTime: { type: Type.NUMBER, description: "Start time in seconds" },
+              endTime: { type: Type.NUMBER, description: "End time in seconds" },
+              text: { type: Type.STRING, description: "Subtitle text in English" }
+            },
+            required: ["startTime", "endTime", "text"]
+          }
+        }
       }
     });
 
@@ -73,8 +86,8 @@ async function extractAudio(file: File): Promise<Blob> {
   const arrayBuffer = await file.arrayBuffer();
   const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
   
-  // Encode as mono 16kHz WAV to keep it small
-  const targetSampleRate = 16000;
+  // Encode as mono 12kHz WAV to keep it very small (speech is fine at this rate)
+  const targetSampleRate = 12000;
   const offlineCtx = new OfflineAudioContext(1, Math.ceil(audioBuffer.duration * targetSampleRate), targetSampleRate);
   
   const source = offlineCtx.createBufferSource();

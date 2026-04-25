@@ -194,9 +194,9 @@ export default function App() {
 
       <div className="flex flex-1 min-h-0">
         {/* Unified Sidebar */}
-        <aside className="w-[230px] bg-slate-850 border border-slate-700 p-3.5 flex flex-col gap-4.5 shrink-0 z-10 overflow-y-auto custom-scrollbar rounded-bl">
+        <aside className="w-[230px] bg-slate-850 border border-slate-700 p-3.5 flex flex-col gap-3.5 shrink-0 z-10 overflow-y-auto custom-scrollbar rounded-bl">
           {/* Source Section */}
-          <section className="space-y-1">
+          <section className="space-y-0.5">
             <label className="text-[10px] uppercase font-black text-slate-200 block tracking-wider opacity-70">Source Media</label>
             <div className="relative">
               <input
@@ -211,12 +211,12 @@ export default function App() {
                 className="block border border-dashed border-slate-500 rounded p-3 text-center cursor-pointer hover:border-yellow-500 bg-slate-900/50 transition-all group"
               >
                 {videoFile ? (
-                  <div className="space-y-1.5">
+                  <div className="space-y-1">
                     <p className="text-[11px] text-slate-50 font-medium truncate">{videoFile.name}</p>
                     <span className="text-[9px] text-slate-400 font-mono">{(videoFile.size / (1024 * 1024)).toFixed(1)}MB</span>
                   </div>
                 ) : (
-                  <div className="space-y-1.5">
+                  <div className="space-y-1">
                     <Upload size={16} className="mx-auto text-slate-300 group-hover:text-yellow-400" />
                     <p className="text-[10px] text-slate-300 font-bold uppercase tracking-tight">Load Video</p>
                   </div>
@@ -226,7 +226,7 @@ export default function App() {
           </section>
 
           {/* Language Section */}
-          <section className="space-y-1">
+          <section className="space-y-0.5">
             <label className="text-[10px] uppercase font-black text-slate-200 block tracking-wider opacity-70">Language</label>
             <div className="relative">
               <Globe size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 pointer-events-none" />
@@ -243,7 +243,7 @@ export default function App() {
           </section>
 
           {/* Styling Section */}
-          <section className="space-y-2 pt-1 border-t border-slate-700/50">
+          <section className="space-y-1.5 pt-1 border-t border-slate-700/50">
             <label className="text-[10px] uppercase font-black text-slate-200 block tracking-wider opacity-70">Styling</label>
             
             <div className="space-y-1">
@@ -358,7 +358,7 @@ export default function App() {
             </button>
             <div className="mt-1.5 text-center">
               <p className="text-[8px] text-slate-400 uppercase font-black tracking-widest opacity-60">
-                GEMINI 1.5 FLASH
+                GEMINI FLASH LATEST
               </p>
             </div>
           </div>

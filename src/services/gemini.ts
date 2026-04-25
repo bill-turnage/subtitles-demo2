@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Type } from "@google/genai";
 import { Subtitle } from "../types";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
@@ -23,33 +23,47 @@ export async function generateSubtitles(
 
     const prompt = `
       Transcribe and translate the following video audio from ${sourceLang} to English.
-      Return the result as a JSON array of objects with the following structure:
-      [{ "startTime": number, "endTime": number, "text": "string" }]
+      Return the result as a JSON array of objects.
       Ensure the timings are accurate to the speech in the video.
       The text should be natural-sounding English subtitles.
     `;
 
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: {
-        parts: [
-          { text: prompt },
-          {
-            inlineData: {
-              mimeType: file.type,
-              data: base64Data
+      contents: [
+        {
+          role: "user",
+          parts: [
+            { text: prompt },
+            {
+              inlineData: {
+                mimeType: file.type,
+                data: base64Data
+              }
             }
-          }
-        ]
-      },
+          ]
+        }
+      ],
       config: {
         responseMimeType: "application/json",
+        responseSchema: {
+          type: Type.ARRAY,
+          items: {
+            type: Type.OBJECT,
+            properties: {
+              startTime: { type: Type.NUMBER, description: "Start time in seconds" },
+              endTime: { type: Type.NUMBER, description: "End time in seconds" },
+              text: { type: Type.STRING, description: "Subtitle text" }
+            },
+            required: ["startTime", "endTime", "text"]
+          }
+        }
       }
     });
 
     onProgress(90);
     
-    // Use .text property as per @google/genai spec
+    // The SDK returns text directly on the response object
     const resultText = response.text || "[]";
     const result = JSON.parse(resultText) as any[];
     
